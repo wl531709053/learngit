@@ -1,3 +1,5 @@
+                             git学习总结
+
 一、git配置
    git config --global user.name "wanglin"     #配置用户名
    git config --global user.email "531709053@qq.com"   #配置邮箱
@@ -37,3 +39,45 @@
     3、点击Add Keys
     4、关联远程库，使用命令：git remote add origin git@server-name:path/repo-name.git
        server-name 一般是指github,repo-name为仓库名，path为远程仓库的路径
+    5、克隆远程仓库，使用命令：git clone git@github.com:wl531709053/gitskills.git
+
+五、分支管理
+    1、创建分支：git branch branchname
+    2、切换分支：git checkout branchname,合并1和2：git checkout -b branchname
+    3、查看当前分支：git branch
+    4、合并某分支到当前分支：git merge branchname
+    5、删除分支：git branch -d branchname
+    6、使用git log --graph查看分支合并图
+    7、合并分支时，使用--no-ff能保留分支信息，即：
+       git merge --no-ff -m "merge branch" branchname
+修复BUG时：8、在当前分支暂存现有工作，使用git stash
+          9、创建并切换至bug分支，修复后合入其他分支，然后再删除该分支
+          10、查看暂存工作，使用git stash list
+          11、恢复暂存工作：git stash apply  (恢复)
+                          git stash drop   (删除)
+                          git stash pop (回复并删除)
+分支合并前删除该分支：12、git branch -D branchname
+    13、查看远程库信息，使用git remote -v；
+    14、本地新建的分支如果不推送到远程，对其他人就是不可见的；
+    15、从本地推送分支，使用git push origin branch-name，如果推送失败，先用git pull抓取远程的新提交；
+    16、在本地创建和远程分支对应的分支，使用git checkout -b branch-name origin/branch-name，本地和远程分支的名称最好一致；
+    17、建立本地分支和远程分支的关联，使用git branch --set-upstream branch-name origin/branch-name；
+    18、从远程抓取分支，使用git pull，如果有冲突，要先处理冲突
+
+六、标签管理
+    1、给分支创建标签：先切换到需要创建标签的分支上，然后使用git tag <name>
+    2、标签是打在commit id上，可使用git log查看commit id 然后使用
+       git tag <name> commit_id
+    3、创建带有说明的标签，使用：git tag -a <tagname> -m "说明"
+    4、查看标签：git tag
+    5、git show <tagname> 查看标签说明
+    6、删除标签（本地）：git tag -d <name>
+    7、推送标签至远程：git push origin <name> 单个推送
+                     git push origin --tags 推送所有标签
+    8、删除标签(远程仓库)：git push origin :refs/tags/<tagname>
+    9、编写.gitignore文件，忽略特殊文件，使得git status为cleaning work
+七、搭建git服务器
+   https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/00137583770360579bc4b458f044ce7afed3df579123eca000
+
+
+参考自廖雪峰的git教程：https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000
